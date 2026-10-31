@@ -74,14 +74,21 @@
       ["bookings.html", "My Bookings"],
     ];
     $("#header").innerHTML =
-      `<header class="nav"><a class="brand" href="index.html"><span class="brand-symbol">A<span>↗</span></span><span>ZOOM<small>PREMIUM CAR RENTALS</small></span></a><nav class="navlinks">${links.map(([h, n]) => `<a class="${location.pathname.endsWith(h) ? "active" : ""}" href="${h}">${n}</a>`).join("")}</nav><div class="navright"><a class="profile-link" href="${user() ? "profile.html" : "login.html"}" aria-label="Profile or sign in"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-5 16-5 16 0"/></svg><span>${user() ? escape(user().name.split(" ")[0]) : "Sign in"}</span></a><a class="btn btn-primary navcta" href="cars.html">Book a Car ↗</a><button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">☰</button></div></header><nav class="mobile-nav" id="mobile-nav" hidden>${links.map(([h, n]) => `<a href="${h}">${n}</a>`).join("")}<a href="profile.html">Profile</a><a href="employee.html">Employee portal</a></nav>`;
+      `<header class="nav"><a class="brand" href="index.html">
+    <img src="/images/logo.png" alt="A Zoom Logo" class="brand-logo">
+    <span>ZOOM<small>PREMIUM CAR RENTALS</small></span>
+</a><nav class="navlinks">${links.map(([h, n]) => `<a class="${location.pathname.endsWith(h) ? "active" : ""}" href="${h}">${n}</a>`).join("")}</nav><div class="navright"><a class="profile-link" href="${user() ? "profile.html" : "login.html"}" aria-label="Profile or sign in"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-5 16-5 16 0"/></svg><span>${user() ? escape(user().name.split(" ")[0]) : "Sign in"}</span></a><a class="btn btn-primary navcta" href="cars.html">Book a Car ↗</a>
+<button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">☰</button></div></header><nav class="mobile-nav" id="mobile-nav" hidden>${links.map(([h, n]) => `<a href="${h}">${n}</a>`).join("")}</nav>`;
     $("#hamburger").onclick = () => {
       const n = $("#mobile-nav");
       n.hidden = !n.hidden;
       $("#hamburger").setAttribute("aria-expanded", String(!n.hidden));
     };
     $("#footer").innerHTML =
-      `<footer class="footer"><div class="footer-grid"><div><a class="brand" href="index.html"><span class="brand-symbol">A<span>↗</span></span><span>ZOOM<small>PREMIUM CAR RENTALS</small></span></a><p>Exceptional cars. Effortless journeys.<br>Built for the way you move.</p></div><div><h4>Explore</h4><a href="cars.html">Our Fleet</a><a href="locations.html">Showroom Offices</a><a href="how.html">How It Works</a></div><div><h4>Account</h4><a href="bookings.html">My Bookings</a><a href="profile.html">My Profile</a><a href="employee.html">Employee Portal</a></div><div><h4>Social</h4><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram ↗</a><a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook ↗</a><a href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok ↗</a><a href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube ↗</a></div></div><div class="footer-bottom"><span>© 2026 A Zoom - Your Journey</span><a href="index.html">Back to home ↑</a></div></footer>`;
+      `<footer class="footer"><div class="footer-grid"><div><a class="brand" href="index.html">
+    <img src="/images/logo.png" alt="A Zoom Logo" class="brand-logo">
+    <span>ZOOM<small>PREMIUM CAR RENTALS</small></span>
+</a><p>Exceptional cars. Effortless journeys.<br>Built for the way you move.</p></div><div><h4>Explore</h4><a href="cars.html">Our Fleet</a><a href="locations.html">Showroom Offices</a><a href="how.html">How It Works</a></div><div><h4>Account</h4><a href="bookings.html">My Bookings</a><a href="profile.html">My Profile</a></div><div><h4>Social</h4><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram ↗</a><a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook ↗</a><a href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok ↗</a><a href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube ↗</a></div></div><div class="footer-bottom"><span>© 2026 A Zoom - Your Journey</span><a href="index.html">Back to home ↑</a></div></footer>`;
   }
   function carCard(c) {
     return `<article class="car-card">${photo(c)}<div class="card-body"><div class="card-top"><span class="pill">${c.category}</span><span class="muted">${c.fuel}</span></div><h3>${escape(c.name)}</h3><p class="muted">${c.seats} seats · ${c.transmission}</p><div class="card-bottom"><div><strong>${money(c.price)}</strong><small> / day</small></div><a class="btn btn-primary" href="car.html?id=${c.id}">View Car ↗</a></div></div></article>`;
@@ -89,36 +96,252 @@
   function index() {
     const featured = D.cars.slice(0, 3);
     $("#content").innerHTML =
-      `<section class="hero"><div class="hero-image"></div><div class="hero-overlay"></div><div class="hero-copy wrap"><div class="eyebrow light">● PREMIUM DRIVING IN SINGAPORE</div><h1>YOUR DRIVE.<br><em>YOUR RULES.</em></h1><p>From everyday escapes to extraordinary journeys. Find your perfect ride and reserve in minutes.</p><div class="row"><a class="btn btn-primary btn-lg" href="cars.html">Explore the Fleet ↗</a><a class="btn btn-outline btn-lg" href="how.html">How it works ↓</a></div><div class="hero-stats"><span><b>12</b><small>Curated vehicles</small></span><span><b>5</b><small>Showroom-inspired offices</small></span><span><b>24/7</b><small>Online booking</small></span></div></div><div class="scroll-label">SCROLL TO EXPLORE ↓</div></section><section class="search-container wrap"><form id="hero-search" class="search-panel"><div><span class="eyebrow">YOUR NEXT JOURNEY</span><h2>Find your perfect drive.</h2></div><label>Pick-up office<select id="hero-office">${D.locations.map((l) => `<option value="${l.id}">${l.name}</option>`).join("")}</select></label><label>Pick-up date<input type="date" id="hero-date" required min="${today()}"></label><button class="btn btn-primary">Find My Ride ↗</button></form></section><section class="section wrap"><div class="section-title"><div><span class="eyebrow">THE COLLECTION</span><h2>Made for <em>every journey.</em></h2></div><a href="cars.html" class="text-link">View all vehicles ↗</a></div><div class="grid cars">${featured.map(carCard).join("")}</div></section><section class="section soft"><div class="wrap"><div class="section-title"><div><span class="eyebrow">THE A ZOOM ADVANTAGE</span><h2>Why choose <em>us?</em></h2></div><p>Every detail designed to make the road ahead simpler.</p></div><div class="grid three">${[
-        [
-          "✦",
-          "Curated premium fleet",
-          "From practical city cars to iconic performance models.",
-        ],
-        [
-          "◇",
-          "Clear pricing",
-          "Know your rental rate, optional extras, and final charges.",
-        ],
-        [
-          "↗",
-          "Flexible experience",
-          "Explore office locations, manage bookings and returns online.",
-        ],
-      ]
-        .map(
-          (x) =>
-            `<article class="feature"><span>${x[0]}</span><h3>${x[1]}</h3><p>${x[2]}</p></article>`,
-        )
-        .join(
-          "",
-        )}</div></div></section><section class="section wrap"><div class="split"><div><span class="eyebrow">OUR STORY</span><h2>Driving should feel <em>extraordinary.</em></h2><p class="lead-dark">A Zoom is a concept car rental experience built around effortless discovery, transparent rental management and beautifully simple technology.</p><a href="how.html" class="btn btn-dark">Discover how it works ↗</a></div><img class="about-image" src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=85" alt="Premium car on a scenic road"></div></section><section class="cta"><div class="wrap"><span class="eyebrow light">READY WHEN YOU ARE</span><h2>The road is calling.<br><em>Answer it.</em></h2><a class="btn btn-white" href="cars.html">Find your car ↗</a></div></section>`;
+      `<section class="hero"><div class="hero-image"></div><div class="hero-overlay"></div><div class="hero-copy wrap"><div class="eyebrow light">● PREMIUM DRIVING IN SINGAPORE</div><h1>YOUR DRIVE.<br><em>YOUR RULES.</em></h1><p>From everyday escapes to extraordinary journeys. Find your perfect ride and reserve in minutes.</p><div class="row"><a class="btn btn-primary btn-lg" href="cars.html">Explore the Fleet ↗</a><a class="btn btn-outline btn-lg" href="how.html">How it works ↓</a></div><div class="hero-stats"><span><b>12</b><small>Curated vehicles</small></span><span><b>5</b><small>Showroom offices</small></span><span><b>24/7</b><small>Online booking</small></span></div></div></section>
+      
+      <section class="search-container wrap"><form id="hero-search" class="search-panel"><div><span class="eyebrow">YOUR NEXT JOURNEY</span><h2>Find your perfect drive.</h2></div><label>Pick-up office<select id="hero-office">${D.locations.map((l) => `<option value="${l.id}">${l.name}</option>`).join("")}</select></label><label>Pick-up date<input type="date" id="hero-date" required min="${today()}"></label><button class="btn btn-primary">Find My Ride ↗</button></form></section>
+      
+      <section class="brand-showcase">
+      <div class="brand-carousel">
+        <div class="brand-track">
+
+            <div class="car-brand">
+                <img src="https://cdn.simpleicons.org/bmw" alt="BMW">
+            </div>
+
+            <div class="car-brand">
+                <img src="/images/mercedes.jpg" alt="Mercedes-Benz">
+            </div>
+
+            <div class="car-brand">
+                <img src="https://cdn.simpleicons.org/audi" alt="Audi">
+            </div>
+
+            <div class="car-brand">
+                <img src="https://cdn.simpleicons.org/porsche" alt="Porsche">
+            </div>
+
+            <div class="car-brand">
+                <img src="https://cdn.simpleicons.org/tesla" alt="Tesla">
+            </div>
+
+            <div class="car-brand">
+                <img src="https://cdn.simpleicons.org/toyota" alt="Toyota">
+            </div>
+
+            <div class="car-brand">
+                <img src="https://cdn.simpleicons.org/honda" alt="Honda">
+            </div>
+
+            <div class="car-brand">
+                <img src="https://cdn.simpleicons.org/lamborghini" alt="Lamborghini">
+            </div>
+
+            <div class="car-brand">
+                <img src="https://cdn.simpleicons.org/bmw" alt="BMW">
+            </div>
+
+            <div class="car-brand">
+                <img src="/images/mercedes.jpg" alt="Mercedes-Benz">
+            </div>
+
+            <div class="car-brand">
+                <img src="https://cdn.simpleicons.org/audi" alt="Audi">
+            </div>
+
+            <div class="car-brand">
+                <img src="https://cdn.simpleicons.org/porsche" alt="Porsche">
+            </div>
+
+            <div class="car-brand">
+                <img src="https://cdn.simpleicons.org/tesla" alt="Tesla">
+            </div>
+
+            <div class="car-brand">
+                <img src="https://cdn.simpleicons.org/toyota" alt="Toyota">
+            </div>
+
+            <div class="car-brand">
+                <img src="https://cdn.simpleicons.org/honda" alt="Honda">
+            </div>
+
+            <div class="car-brand">
+                <img src="https://cdn.simpleicons.org/lamborghini" alt="Lamborghini">
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- PREMIUM CAR CAROUSEL -->
+<section class="section az-carousel-section">
+
+    <div class="wrap">
+        <div class="section-title">
+            <div>
+                <span class="eyebrow">THE COLLECTION</span>
+                <h2>Made for <em>every journey.</em></h2>
+            </div>
+
+            <a href="cars.html" class="text-link">
+                View all vehicles ↗
+            </a>
+        </div>
+    </div>
+
+    <div class="az-carousel">
+
+        <button class="az-carousel-arrow az-prev"
+                type="button"
+                aria-label="Previous car">
+            &#10094;
+        </button>
+
+        <div class="az-carousel-stage">
+
+            ${featured
+              .map(
+                (car, index) => `
+                <div class="az-carousel-item"
+                     data-index="${index}">
+                    ${carCard(car)}
+                </div>
+            `,
+              )
+              .join("")}
+
+        </div>
+
+        <button class="az-carousel-arrow az-next"
+                type="button"
+                aria-label="Next car">
+            &#10095;
+        </button>
+
+    </div>
+
+    <div class="az-carousel-dots">
+        ${featured
+          .map(
+            (_, index) => `
+            <button class="az-carousel-dot"
+                    data-index="${index}"
+                    aria-label="Go to car ${index + 1}">
+            </button>
+        `,
+          )
+          .join("")}
+    </div>
+
+</section>
+      <!-- WHY CHOOSE A ZOOM -->
+<section class="section az-why">
+
+    <div class="wrap">
+
+        <div class="az-why-heading">
+            <span class="eyebrow">THE A ZOOM ADVANTAGE</span>
+            <h2>Driven by <em>better experiences.</em></h2>
+            <p>
+                A more refined way to discover, book, and enjoy
+                your next journey.
+            </p>
+        </div>
+
+        <div class="az-why-grid">
+
+            <div class="az-why-item">
+                <div class="az-why-icon">
+                    <svg viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="1.5"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 17h14l-1.5-6H6.5L5 17Z"/>
+                        <path d="M7 11l2-4h6l2 4"/>
+                        <path d="M5 17v2M19 17v2"/>
+                        <circle cx="8" cy="15" r="1"/>
+                        <circle cx="16" cy="15" r="1"/>
+                    </svg>
+                </div>
+
+                <span class="az-why-number">01</span>
+                <h3>Exceptional Fleet</h3>
+                <p>
+                    Discover a carefully selected collection of
+                    vehicles for every occasion and driving style.
+                </p>
+            </div>
+
+            <div class="az-why-item">
+                <div class="az-why-icon">
+                    <svg viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="1.5"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="4" y="3" width="16" height="18" rx="2"/>
+                        <path d="M8 8h8M8 12h8M8 16h4"/>
+                        <path d="m15 16 2 2 3-4"/>
+                    </svg>
+                </div>
+
+                <span class="az-why-number">02</span>
+                <h3>Transparent Pricing</h3>
+                <p>
+                    Understand your rental costs, deposits, and
+                    additional charges before making a decision.
+                </p>
+            </div>
+
+            <div class="az-why-item">
+                <div class="az-why-icon">
+                    <svg viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="1.5"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="5" width="18" height="16" rx="2"/>
+                        <path d="M7 3v4M17 3v4M3 10h18"/>
+                        <path d="m9 15 2 2 4-4"/>
+                    </svg>
+                </div>
+
+                <span class="az-why-number">03</span>
+                <h3>Seamless Booking</h3>
+                <p>
+                    Find your ideal car, choose your dates,
+                    and manage reservations in just a few steps.
+                </p>
+            </div>
+
+            <div class="az-why-item">
+                <div class="az-why-icon">
+                    <svg viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="1.5"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-5.5 8-12a8 8 0 1 0-16 0c0 6.5 8 12 8 12Z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                </div>
+
+                <span class="az-why-number">04</span>
+                <h3>Flexible Locations</h3>
+                <p>
+                    Explore convenient collection points
+                    and designated return locations across Singapore.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+        
+        <section class="section wrap"><div class="split"><div><span class="eyebrow">OUR STORY</span><h2>Driving should feel <em>extraordinary.</em></h2><p class="lead-dark">A Zoom is a concept car rental experience built around effortless discovery, transparent rental management and beautifully simple technology.</p><a href="how.html" class="btn btn-dark">Discover how it works ↗</a></div><img class="about-image" src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=85" alt="Premium car on a scenic road"></div></section><section class="cta"><div class="wrap"><span class="eyebrow light">READY WHEN YOU ARE</span><h2>The road is calling.<br><em>Answer it.</em></h2><a class="btn btn-white" href="cars.html">Find your car ↗</a></div></section>
+        
+        `;
     $("#hero-search").onsubmit = (e) => {
       e.preventDefault();
       go(
         `cars.html?office=${$("#hero-office").value}&date=${$("#hero-date").value}`,
       );
     };
+    initAZCarousel();
   }
   function cars() {
     const params = new URLSearchParams(location.search);
@@ -169,12 +392,12 @@
       [
         "01",
         "Reserve online",
-        "Choose a car, office and rental dates. Pay a simulated reservation deposit to confirm.",
+        "Choose a car, office and rental dates. Pay a reservation deposit to confirm.",
       ],
       [
         "02",
         "Collect at our office",
-        "Visit your selected showroom-inspired office and record the vehicle’s condition before driving.",
+        "Visit your selected showroom office and record the vehicle’s condition before driving.",
       ],
       [
         "03",
@@ -197,12 +420,78 @@
         "Review the rental amount, deposit credit and any damage fees, then simulate final payment.",
       ],
     ];
-    $("#content").innerHTML =
-      `<section class="page-hero wrap"><span class="eyebrow">EFFORTLESS FROM START TO FINISH</span><h1>How A Zoom <em>works.</em></h1><p>Six clear steps from your first search to your final receipt.</p></section><section class="section wrap"><div class="grid three">${steps.map(([n, h, p]) => `<article class="feature step"><span>${n}</span><h3>${h}</h3><p>${p}</p></article>`).join("")}</div><div class="center"><a href="cars.html" class="btn btn-primary btn-lg">Start your journey ↗</a></div></section>`;
+    $("#content").innerHTML = `
+<section class="page-hero wrap az-how-hero">
+    <span class="eyebrow">EFFORTLESS FROM START TO FINISH</span>
+
+    <h1>How A Zoom <em>works.</em></h1>
+
+    <p>
+        From finding your perfect ride to completing your journey.
+        Six simple steps, one seamless experience.
+    </p>
+</section>
+
+<section class="az-how-section">
+
+    <div class="wrap">
+
+        <div class="az-how-intro">
+            <span class="eyebrow">YOUR JOURNEY, SIMPLIFIED</span>
+            <h2>Every step of the <em>way.</em></h2>
+            <p>
+                We've made the rental experience straightforward,
+                so you can spend less time planning and more time driving.
+            </p>
+        </div>
+
+        <div class="az-timeline">
+
+            ${steps
+              .map(
+                ([n, h, p], index) => `
+                <div class="az-timeline-step ${index % 2 === 0 ? "az-step-left" : "az-step-right"}">
+
+                    <div class="az-timeline-content">
+                        <span class="az-step-label">STEP ${n}</span>
+
+                        <h3>${h}</h3>
+
+                        <p>${p}</p>
+                    </div>
+
+                    <div class="az-timeline-marker">
+                        <span>${n}</span>
+                    </div>
+
+                </div>
+            `,
+              )
+              .join("")}
+
+        </div>
+        <div class="az-how-cta">
+            <span class="eyebrow">READY TO GET STARTED?</span>
+
+            <h2>Your next journey <em>starts here.</em></h2>
+
+            <p>
+                Explore our collection and find the perfect car
+                for wherever the road takes you.
+            </p>
+
+            <a href="cars.html" class="btn btn-primary btn-lg">
+                Explore Our Fleet ↗
+            </a>
+        </div>
+
+    </div>
+
+</section>`;
   }
   function locations() {
     $("#content").innerHTML =
-      `<section class="page-hero wrap"><span class="eyebrow">SHOWROOM-INSPIRED OFFICES</span><h1>Find your <em>pick-up point.</em></h1><p>Five illustrative offices in well-known Singapore automotive districts.</p></section><section class="wrap section compact"><div class="map-layout"><div id="map"></div><div class="office-list">${D.locations.map((l) => `<article class="office"><h3>${l.name}</h3><p>${l.address}</p><div class="row"><button class="btn btn-dark btn-sm" data-focus="${l.id}">View on map</button><a class="btn btn-outline-dark btn-sm" href="cars.html?office=${l.id}">Browse cars ↗</a></div></article>`).join("")}</div></div><p class="muted small">Map shows approximate automotive districts, not actual A Zoom branches. Map tiles require internet access.</p></section>`;
+      `<section class="page-hero wrap"><span class="eyebrow">SHOWROOM OFFICES</span><h1>Find your <em>pick-up point.</em></h1><p>Five illustrative offices in well-known Singapore automotive districts.</p></section><section class="wrap section compact"><div class="map-layout"><div id="map"></div><div class="office-list">${D.locations.map((l) => `<article class="office"><h3>${l.name}</h3><p>${l.address}</p><div class="row"><button class="btn btn-dark btn-sm" data-focus="${l.id}">View on map</button><a class="btn btn-outline-dark btn-sm" href="cars.html?office=${l.id}">Browse cars ↗</a></div></article>`).join("")}</div></div><p class="muted small">Map shows approximate automotive districts, not actual A Zoom branches. Map tiles require internet access.</p></section>`;
     if (typeof L === "undefined") {
       $("#map").innerHTML =
         "<p>Map unavailable offline. Connect to the internet to view office locations.</p>";
@@ -234,7 +523,7 @@
   function auth() {
     const signup = currentPage === "register";
     $("#content").innerHTML =
-      `<section class="auth-bg"><div class="auth-card"><span class="eyebrow">WELCOME TO A ZOOM</span><h1>${signup ? "Create your account" : "Welcome back."}</h1><p class="muted">Frontend account</p><form id="auth-form">${signup ? '<label>Full name<input name="name" required minlength="2" maxlength="70" placeholder="Your name"></label>' : ""}<label>Email address<input type="email" name="email" required placeholder="you@example.com"></label>${signup ? '<label>Phone (optional)<input name="phone" placeholder="+65 9123 4567" maxlength="20"></label>' : ""}<label>Demo access code<input type="password" name="code" required minlength="4" placeholder="Any 4+ characters"></label><button class="btn btn-primary full">${signup ? "Create account" : "Sign in"} ↗</button></form><p class="small">${signup ? 'Already have an account? <a href="login.html">Sign in</a>' : 'New to A Zoom? <a href="register.html">Create account</a>'}</p><p class="small muted">Employee? <a href="employee.html">Employee portal</a></p></div></section>`;
+      `<section class="auth-bg"><div class="auth-card"><span class="eyebrow">WELCOME TO A ZOOM</span><h1>${signup ? "Create your account" : "Welcome back."}</h1><form id="auth-form">${signup ? '<label>Full name<input name="name" required minlength="2" maxlength="70" placeholder="Your name"></label>' : ""}<label>Email address<input type="email" name="email" required placeholder="you@example.com"></label>${signup ? '<label>Phone (optional)<input name="phone" placeholder="+65 9123 4567" maxlength="20"></label>' : ""}<label>Demo access code<input type="password" name="code" required minlength="4" placeholder="Any 4+ characters"></label><button class="btn btn-primary full">${signup ? "Create account" : "Sign in"} ↗</button></form><p class="small">${signup ? 'Already have an account? <a href="login.html">Sign in</a>' : 'New to A Zoom? <a href="register.html">Create account</a>'}</p><p class="small muted">Employee? <a href="employee.html">Employee portal</a></p></div></section>`;
     $("#auth-form").onsubmit = (e) => {
       e.preventDefault();
       const f = new FormData(e.target),
@@ -269,28 +558,257 @@
     if (!requireUser()) return;
     const u = user();
     $("#content").innerHTML =
-      `<section class="page-hero wrap"><span class="eyebrow">YOUR ACCOUNT</span><h1>My <em>profile.</em></h1></section><section class="section wrap compact"><div class="profile-card"><div class="avatar">${escape(u.name[0]).toUpperCase()}</div><form id="profile-form"><label>Full name<input name="name" required value="${escape(u.name)}"></label><label>Email<input value="${escape(u.email)}" disabled></label><label>Phone<input name="phone" value="${escape(u.phone || "")}"></label><div class="row"><button class="btn btn-primary">Save profile</button><button class="btn btn-outline-dark" type="button" id="logout">Sign out</button></div></form></div></section>`;
-    $("#profile-form").onsubmit = (e) => {
-      e.preventDefault();
-      const f = new FormData(e.target),
-        v = {
-          ...u,
-          name: String(f.get("name")).trim(),
-          phone: String(f.get("phone")).trim(),
-        };
-      store.set("user", v);
-      store.set(
-        "users",
-        store.get("users", []).map((x) => (x.email === u.email ? v : x)),
-      );
-      toast("Profile updated");
-      layout();
-    };
-    $("#logout").onclick = () => {
-      localStorage.removeItem("az_user");
-      go("index.html");
-    };
+      `<section class="az-profile-page">
+  <div class="wrap">
+
+    <!-- PROFILE HEADER -->
+    <div class="az-profile-header">
+      <div>
+        <span class="eyebrow">YOUR ACCOUNT</span>
+        <h1>My <em>Profile</em></h1>
+        <p>Manage your personal details and account preferences.</p>
+      </div>
+      <a href="bookings.html" class="btn btn-outline-dark">
+        My Bookings ↗
+      </a>
+    </div>
+
+    <div class="az-profile-layout">
+
+      <!-- LEFT: PROFILE SUMMARY -->
+      <aside class="az-profile-sidebar">
+        <div class="az-profile-avatar" id="profile-avatar">
+          ${escape(u.name[0] || "U").toUpperCase()}
+        </div>
+
+        <h2 id="profile-display-name">${escape(u.name)}</h2>
+        <p>${escape(u.email)}</p>
+
+        <div class="az-profile-status">
+          <span class="az-status-dot"></span>
+          Account Active
+        </div>
+
+        <div class="az-profile-divider"></div>
+
+        <div class="az-profile-meta">
+          <span>Account type</span>
+          <strong>A Zoom Member</strong>
+        </div>
+
+        <div class="az-profile-meta">
+          <span>Membership</span>
+          <strong>Standard</strong>
+        </div>
+
+        <a href="cars.html" class="az-profile-fleet-link">
+          Explore Our Fleet ↗
+        </a>
+      </aside>
+
+      <!-- RIGHT: ACCOUNT DETAILS -->
+      <div class="az-profile-main">
+
+        <div class="az-profile-panel">
+          <div class="az-profile-panel-heading">
+            <div>
+              <h2>Personal Information</h2>
+              <p>Keep your contact information up to date.</p>
+            </div>
+            <span class="az-profile-panel-label">ACCOUNT DETAILS</span>
+          </div>
+
+          <form id="profile-form">
+
+            <div class="az-profile-field-grid">
+              <label>
+                Full Name
+                <input
+                  name="name"
+                  type="text"
+                  required
+                  value="${escape(u.name)}"
+                  placeholder="Enter your full name"
+                >
+              </label>
+
+              <label>
+                Phone Number
+                <input
+                  name="phone"
+                  type="tel"
+                  value="${escape(u.phone || "")}"
+                  placeholder="Enter your phone number"
+                >
+              </label>
+            </div>
+
+            <label class="az-profile-email-field">
+              Email Address
+              <input
+                type="email"
+                value="${escape(u.email)}"
+                disabled
+              >
+              <small>Your email address is linked to your account.</small>
+            </label>
+
+            <div class="az-profile-form-footer">
+              <div id="profile-save-status" class="az-profile-save-status"
+                   role="status" aria-live="polite"></div>
+
+              <button class="btn btn-primary" type="submit"
+                      id="profile-save-btn" disabled>
+                Save Changes
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- ACCOUNT ACTIONS -->
+        <div class="az-profile-panel az-account-panel">
+          <div>
+            <h2>Account & Security</h2>
+            <p>Manage your account access and sign-in session.</p>
+          </div>
+
+          <div class="az-account-action">
+            <div>
+              <strong>Sign out of A Zoom</strong>
+              <p>Securely end your current session.</p>
+            </div>
+
+            <button
+              class="btn btn-outline-dark"
+              type="button"
+              id="logout"
+            >
+              Sign Out
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>`;
+    // ==========================================
+// PROFILE — EDIT, SAVE & LIVE UPDATES
+// ==========================================
+
+const profileForm = $("#profile-form");
+const saveButton = $("#profile-save-btn");
+const saveStatus = $("#profile-save-status");
+
+const nameInput = profileForm.elements.namedItem("name");
+const phoneInput = profileForm.elements.namedItem("phone");
+
+// Store the original saved values
+let savedName = u.name;
+let savedPhone = u.phone || "";
+
+// Check whether the user has made changes
+function checkProfileChanges() {
+  const currentName = nameInput.value.trim();
+  const currentPhone = phoneInput.value.trim();
+
+  const hasChanges =
+    currentName !== savedName ||
+    currentPhone !== savedPhone;
+
+  // Enable save only when changes are valid
+  saveButton.disabled =
+    !hasChanges ||
+    !profileForm.checkValidity();
+
+  if (hasChanges) {
+    saveStatus.textContent = "You have unsaved changes";
+    saveStatus.classList.remove("success");
+    saveStatus.classList.add("unsaved");
+  } else {
+    saveStatus.textContent = "";
+    saveStatus.classList.remove("success", "unsaved");
   }
+}
+
+// Detect changes as the user types
+nameInput.addEventListener("input", checkProfileChanges);
+phoneInput.addEventListener("input", checkProfileChanges);
+
+// ==========================================
+// SAVE PROFILE
+// ==========================================
+
+profileForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const newName = nameInput.value.trim();
+  const newPhone = phoneInput.value.trim();
+
+  if (!newName || !profileForm.checkValidity()) return;
+
+  // Create updated user object
+  const updatedUser = {
+    ...u,
+    name: newName,
+    phone: newPhone
+  };
+
+  // Save current user
+  store.set("user", updatedUser);
+
+  // Update registered users database
+  store.set(
+    "users",
+    store.get("users", []).map((x) =>
+      x.email === u.email ? updatedUser : x
+    )
+  );
+
+  // Update profile name immediately
+  $("#profile-display-name").textContent = newName;
+
+  // Update avatar initial immediately
+  $("#profile-avatar").textContent =
+    newName.charAt(0).toUpperCase();
+
+  // Update saved values for future edits
+  savedName = newName;
+  savedPhone = newPhone;
+
+  // Disable save button again
+  saveButton.disabled = true;
+
+  // Show success confirmation
+  saveStatus.textContent = "✓ Profile updated successfully";
+  saveStatus.classList.remove("unsaved");
+  saveStatus.classList.add("success");
+
+  // Refresh navbar with updated user information
+  layout();
+
+  // Remove confirmation after 4 seconds
+  setTimeout(() => {
+    if (
+      saveStatus.textContent ===
+      "✓ Profile updated successfully"
+    ) {
+      saveStatus.textContent = "";
+      saveStatus.classList.remove("success");
+    }
+  }, 4000);
+});
+
+// ==========================================
+// LOGOUT — KEEP EXISTING FUNCTIONALITY
+// ==========================================
+
+$("#logout").onclick = () => {
+  localStorage.removeItem("az_user");
+  go("index.html");
+};
+}
   function available(car, start, end, exclude) {
     return !bookings().some(
       (b) =>
@@ -417,16 +935,16 @@
     const final = b.status === "Final Payment Due";
     const due = final ? Math.max(0, b.total + b.damage - b.paid) : b.deposit;
     $("#content").innerHTML =
-      `<section class="page-hero wrap"><span class="eyebrow">SECURE-LOOKING CHECKOUT</span><h1>${final ? "Settle your" : "Confirm your"} <em>payment.</em></h1><p>No real payment details or money are collected.</p></section><section class="section wrap compact"><div class="detail-layout"><div class="form-card"><div class="demo-banner">⚠ SIMULATED PAYMENT ONLY — do not enter real card information.</div><h2>Choose a payment method</h2><div class="payment-tabs"><button class="paytab active" data-method="card">💳 Card</button><button class="paytab" data-method="paynow">▦ PayNow</button><button class="paytab" data-method="apple"> Apple Pay</button></div><div id="payment-method"></div><p class="error" id="pay-error" role="alert"></p><button class="btn btn-primary full" id="pay-btn">Complete payment — ${money(due)} ↗</button></div><aside class="booking-aside"><div class="aside-photo">${photo(c)}</div><h3>${escape(c.name)}</h3><p class="muted">Booking ${b.id}</p><div class="price-preview"><p>Rental + extras <b>${money(b.total)}</b></p><p>Damage assessment <b>${money(b.damage)}</b></p><p>Previously paid <b>−${money(b.paid)}</b></p><hr><p><strong>Due now</strong><strong>${money(due)}</strong></p></div></aside></div></section>`;
+      `<section class="page-hero wrap"><span class="eyebrow">SECURE-LOOKING CHECKOUT</span><h1>${final ? "Settle your" : "Confirm your"} <em>payment.</em></h1><p>No real payment details or money are collected.</p></section><section class="section wrap compact"><div class="detail-layout"><div class="form-card"><h2>Choose a payment method</h2><div class="payment-tabs"><button class="paytab active" data-method="card">💳 Card</button><button class="paytab" data-method="paynow">▦ PayNow</button><button class="paytab" data-method="apple"> Apple Pay</button></div><div id="payment-method"></div><p class="error" id="pay-error" role="alert"></p><button class="btn btn-primary full" id="pay-btn">Complete payment — ${money(due)} ↗</button></div><aside class="booking-aside"><div class="aside-photo">${photo(c)}</div><h3>${escape(c.name)}</h3><p class="muted">Booking ${b.id}</p><div class="price-preview"><p>Rental + extras <b>${money(b.total)}</b></p><p>Damage assessment <b>${money(b.damage)}</b></p><p>Previously paid <b>−${money(b.paid)}</b></p><hr><p><strong>Due now</strong><strong>${money(due)}</strong></p></div></aside></div></section>`;
     let method = "card";
     function draw() {
       const target = $("#payment-method");
       target.innerHTML =
         method === "card"
-          ? `<div class="card-demo"><span>AZOOM •nCARD</span><strong>•••• &nbsp; •••• &nbsp; •••• &nbsp; 4242</strong><small>NOT A REAL PAYMENT FORM</small></div><div class="form-grid"><label>Cardholder name<input id="card-name" maxlength="70" placeholder="Sample Name" autocomplete="off"></label><label>Card number<input id="card-number" inputmode="numeric" maxlength="19" placeholder="4242 4242 4242 4242" autocomplete="off"></label><label>Expiry<input id="card-expiry" placeholder="12/29" maxlength="5" autocomplete="off"></label><label>Security code<input id="card-cvv" placeholder="123" maxlength="4" inputmode="numeric" autocomplete="off"></label></div><p class="small muted">Use fictional test values only. Card fields are validated in memory and never saved.</p>`
+          ? `<div class="card-demo"><span>AZOOM •nCARD</span><strong>•••• &nbsp; •••• &nbsp; •••• &nbsp; 4242</strong></div><div class="form-grid"><label>Cardholder name<input id="card-name" maxlength="70" placeholder="Name" autocomplete="off"></label><label>Card number<input id="card-number" inputmode="numeric" maxlength="19" placeholder="4242 4242 4242 4242" autocomplete="off"></label><label>Expiry<input id="card-expiry" placeholder="12/29" maxlength="5" autocomplete="off"></label><label>Security code<input id="card-cvv" placeholder="123" maxlength="4" inputmode="numeric" autocomplete="off"></label></div><p class="small muted">Use fictional test values only. Card fields are validated in memory and never saved.</p>`
           : method === "paynow"
-            ? `<div class="qr-panel"><div id="qr"></div><h3>Scan for a car surprise 🚗</h3><p class="muted">This QR opens a fun A Zoom car trivia page, not a payment destination. Press the button below to simulate payment.</p><a href="car-fun.html" target="_blank" rel="noopener">Open the surprise page ↗</a></div>`
-            : `<div class="apple-panel"><div class="apple-mark">● Pay</div><h3>Apple Pay </h3><p>Simulated Apple Pay selection. No Apple Wallet or real payment gateway is connected.</p></div>`;
+            ? `<div class="qr-panel"><div id="qr"></div><h3>Scan the QR code to make payment via PayNow.</h3></div>`
+            : `<div class="apple-panel"><div class="apple-mark">● Pay</div><h3>Apple Pay </h3></div>`;
       if (method === "paynow") {
         if (typeof QRCode !== "undefined")
           new QRCode($("#qr"), {
@@ -520,22 +1038,85 @@
     if (!requireUser()) return;
     const a = userBookings().slice().reverse();
     $("#content").innerHTML =
-      `<section class="page-hero wrap"><span class="eyebrow">YOUR JOURNEY</span><h1>My <em>bookings.</em></h1><p>Manage reservations, pick-ups, returns and final payments.</p></section><section class="section wrap compact"><div class="stat-grid">${[
-        ["Total bookings", a.length],
-        ["Confirmed", a.filter((b) => b.status === "Confirmed").length],
-        [
-          "Active rentals",
-          a.filter((b) => b.status === "Active Rental").length,
-        ],
-        ["Completed", a.filter((b) => b.status === "Completed").length],
-      ]
-        .map(
-          ([n, v]) =>
-            `<div class="stat"><strong>${v}</strong><span>${n}</span></div>`,
-        )
-        .join(
-          "",
-        )}</div><div class="booking-list">${a.map((b) => bookingCard(b)).join("") || '<div class="empty">No bookings yet. <a href="cars.html">Explore the fleet ↗</a></div>'}</div></section>`;
+      `<!-- MY BOOKINGS DASHBOARD -->
+<section class="az-bookings-page">
+
+    <div class="wrap">
+
+        <!-- COMPACT HEADER -->
+        <div class="az-bookings-header">
+
+            <div class="az-bookings-heading">
+                <span class="eyebrow">YOUR DASHBOARD</span>
+                <h1>My <em>Bookings</em></h1>
+                <p>View and manage your reservations, rentals and payments.</p>
+            </div>
+
+            <a href="cars.html" class="btn btn-primary az-bookings-browse">
+                Browse Cars ↗
+            </a>
+
+        </div>
+
+        <!-- BOOKING STATISTICS -->
+        <div class="az-bookings-stats">
+
+            ${[
+                ["Total Bookings", a.length, "all"],
+                ["Confirmed", a.filter(b => b.status === "Confirmed").length, "confirmed"],
+                ["Active Rentals", a.filter(b => b.status === "Active Rental").length, "active"],
+                ["Completed", a.filter(b => b.status === "Completed").length, "completed"]
+            ].map(([label, value, type]) => `
+
+                <div class="az-booking-stat">
+                    <div class="az-stat-info">
+                        <span class="az-stat-label">${label}</span>
+                        <strong>${value}</strong>
+                    </div>
+
+                    <span class="az-stat-indicator ${type}"></span>
+                </div>
+
+            `).join("")}
+
+        </div>
+
+        <!-- BOOKING LIST -->
+        <div class="az-bookings-content">
+
+            <div class="az-bookings-list-heading">
+                <h2>Your Reservations</h2>
+                <span>${a.length} booking${a.length !== 1 ? "s" : ""}</span>
+            </div>
+
+            <div class="booking-list">
+                ${a.map(b => bookingCard(b)).join("") || `
+                    <div class="az-bookings-empty">
+                        <div class="az-empty-icon">
+                            <svg viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="1.5"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 17h14l-1.5-6H6.5L5 17Z"/>
+                                <path d="M7 11l2-4h6l2 4"/>
+                                <path d="M5 17v2M19 17v2"/>
+                            </svg>
+                        </div>
+
+                        <h3>No bookings yet</h3>
+                        <p>Your next journey starts with the perfect car.</p>
+
+                        <a href="cars.html" class="btn btn-primary">
+                            Explore Our Fleet ↗
+                        </a>
+                    </div>
+                `}
+            </div>
+
+        </div>
+
+    </div>
+
+</section>`;
     bindActions(false);
   }
   function bindActions(emp) {
@@ -550,7 +1131,7 @@
           const b = bookings().find((b) => b.id === x.dataset.cancel);
           if (!["Pending Payment", "Confirmed"].includes(b.status)) return;
           modal(
-            `<h2>Cancel reservation?</h2><p>This will release the vehicle dates. Any previous deposit is marked as a simulated refund, not actually refunded.</p><label>Reason<select id="reason"><option>Change of plans</option><option>Different vehicle</option><option>Other</option></select></label><div class="row"><button class="btn btn-danger" id="confirm-cancel">Cancel reservation</button><button class="btn btn-outline-dark" id="keep">Keep booking</button></div>`,
+            `<h2>Cancel reservation?</h2><p>This will release the vehicle dates. Any previous deposit is marked as a refund, not actually refunded.</p><label>Reason<select id="reason"><option>Change of plans</option><option>Different vehicle</option><option>Other</option></select></label><div class="row"><button class="btn btn-danger" id="confirm-cancel">Cancel reservation</button><button class="btn btn-outline-dark" id="keep">Keep booking</button></div>`,
           );
           $("#keep").onclick = close;
           $("#confirm-cancel").onclick = () => {
@@ -673,7 +1254,7 @@
       "Interior",
     ];
     modal(
-      `<h2>Return inspection</h2><p><b>${b.id}</b> · ${loc(b.returnLoc)}</p><p class="muted">Compare with pick-up notes: ${escape(b.pickupInspection?.notes || "No notes recorded")}</p><p class="muted">Customer return report: ${escape(b.returnReport?.condition || "Not recorded")} — ${escape(b.returnReport?.notes || "")}</p><div class="inspection-grid">${areas.map((a, i) => `<label>${a}<select data-area="${i}"><option value="0">No new damage — S$0</option><option value="75">Minor scratch — S$75</option><option value="180">Dent — S$180</option><option value="450">Major damage — S$450</option></select></label>`).join("")}</div><label>Employee inspection notes<textarea id="inspection-notes" placeholder="Record findings and rationale"></textarea></label><div class="price-preview"><p>Illustrative damage charges <strong id="damage-preview">S$0.00</strong></p><p>Final rental total <strong id="final-preview">${money(b.total)}</strong></p><p>Deposit already paid <strong>−${money(b.paid)}</strong></p><p>Remaining due <strong id="due-preview">${money(b.total - b.paid)}</strong></p></div><p class="small muted">All damage rates are illustrative and do not represent real repair quotations.</p><button class="btn btn-primary full" id="issue-bill">Approve inspection & issue final bill ↗</button>`,
+      `<h2>Return inspection</h2><p><b>${b.id}</b> · ${loc(b.returnLoc)}</p><p class="muted">Compare with pick-up notes: ${escape(b.pickupInspection?.notes || "No notes recorded")}</p><p class="muted">Customer return report: ${escape(b.returnReport?.condition || "Not recorded")} — ${escape(b.returnReport?.notes || "")}</p><div class="inspection-grid">${areas.map((a, i) => `<label>${a}<select data-area="${i}"><option value="0">No new damage — S$0</option><option value="75">Minor scratch — S$75</option><option value="180">Dent — S$180</option><option value="450">Major damage — S$450</option></select></label>`).join("")}</div><label>Employee inspection notes<textarea id="inspection-notes" placeholder="Record findings and rationale"></textarea></label><div class="price-preview"><p>Illustrative damage charges <strong id="damage-preview">S$0.00</strong></p><p>Final rental total <strong id="final-preview">${money(b.total)}</strong></p><p>Deposit already paid <strong>−${money(b.paid)}</strong></p><p>Remaining due <strong id="due-preview">${money(b.total - b.paid)}</strong></p></div><button class="btn btn-primary full" id="issue-bill">Approve inspection & issue final bill ↗</button>`,
     );
     const update = () => {
       const d = $$("[data-area]").reduce((s, x) => s + Number(x.value), 0);
@@ -708,7 +1289,7 @@
       "The Singapore Grand Prix is held on a street circuit at night.",
     ];
     $("#content").innerHTML =
-      `<section class="fun-hero"><div class="wrap"><span class="eyebrow light">A ZOOM CAR CLUB</span><h1>YOU UNLOCKED<br><em>THE FUN LANE! 🏁</em></h1><p>Scanned our PayNow QR? Surprise! This is a car trivia experience — not a payment link.</p><div class="fun-box"><div class="fun-car" id="fun-car">🏎️</div><h2 id="fact">${facts[0]}</h2><button id="next-fact" class="btn btn-white">Another car fact ↗</button></div><a href="cars.html" class="btn btn-outline">Explore the fleet</a></div></section>`;
+      `<section class="fun-hero"><div class="wrap"><span class="eyebrow light">A ZOOM CAR CLUB</span><h1>YOU UNLOCKED<br><em>THE FUN LANE! 🏁</em></h1><p>Scanned our PayNow QR? Surprise! This is a car trivia experience.</p><div class="fun-box"><div class="fun-car" id="fun-car">🏎️</div><h2 id="fact">${facts[0]}</h2><button id="next-fact" class="btn btn-white">Another car fact ↗</button></div><a href="cars.html" class="btn btn-outline">Explore the fleet</a></div></section>`;
     let i = 0;
     $("#next-fact").onclick = () => {
       $("#fact").textContent = facts[++i % facts.length];
@@ -798,3 +1379,115 @@
   }
   document.addEventListener("DOMContentLoaded", init);
 })();
+
+/* ==========================================
+   A ZOOM — PREMIUM CAR CAROUSEL
+========================================== */
+
+function initAZCarousel() {
+  const carousel = document.querySelector(".az-carousel");
+
+  if (!carousel) return;
+
+  const items = [...carousel.querySelectorAll(".az-carousel-item")];
+  const dots = [...document.querySelectorAll(".az-carousel-dot")];
+
+  const prev = carousel.querySelector(".az-prev");
+  const next = carousel.querySelector(".az-next");
+
+  if (!items.length) return;
+
+  let current = 0;
+
+  function updateCarousel() {
+    const total = items.length;
+
+    items.forEach((item, index) => {
+      item.classList.remove("az-active", "az-left", "az-right", "az-hidden");
+
+      const diff = (index - current + total) % total;
+
+      if (diff === 0) {
+        item.classList.add("az-active");
+      } else if (diff === 1) {
+        item.classList.add("az-right");
+      } else if (diff === total - 1) {
+        item.classList.add("az-left");
+      } else {
+        item.classList.add("az-hidden");
+      }
+
+      const active = diff === 0;
+
+      item.setAttribute("aria-hidden", String(!active));
+
+      item.querySelectorAll("a, button, input, select").forEach((el) => {
+        el.tabIndex = active ? 0 : -1;
+      });
+    });
+
+    dots.forEach((dot, index) => {
+      dot.classList.toggle("active", index === current);
+      dot.setAttribute("aria-current", index === current ? "true" : "false");
+    });
+  }
+
+  function goTo(index) {
+    current = (index + items.length) % items.length;
+    updateCarousel();
+  }
+
+  prev.addEventListener("click", () => {
+    goTo(current - 1);
+  });
+
+  next.addEventListener("click", () => {
+    goTo(current + 1);
+  });
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      goTo(index);
+    });
+  });
+
+  /* Click side cards to bring them to centre */
+
+  items.forEach((item, index) => {
+    item.addEventListener("click", (event) => {
+      if (item.classList.contains("az-active")) return;
+
+      event.preventDefault();
+      goTo(index);
+    });
+  });
+
+  /* Mobile swipe support */
+
+  let touchStartX = 0;
+
+  carousel.addEventListener(
+    "touchstart",
+    (event) => {
+      touchStartX = event.changedTouches[0].screenX;
+    },
+    { passive: true },
+  );
+
+  carousel.addEventListener(
+    "touchend",
+    (event) => {
+      const touchEndX = event.changedTouches[0].screenX;
+      const difference = touchStartX - touchEndX;
+
+      if (Math.abs(difference) > 50) {
+        goTo(current + (difference > 0 ? 1 : -1));
+      }
+    },
+    { passive: true },
+  );
+
+  /* Initial state */
+
+  updateCarousel();
+}

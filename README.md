@@ -14,7 +14,7 @@ A university assignment demonstration built with **HTML5, CSS3, vanilla JavaScri
 - `index.html` — cinematic homepage, search, About Us, Why Choose Us
 - `cars.html` — searchable and filterable fleet
 - `car.html?id=1` — vehicle detail
-- `locations.html` — Leaflet map and showroom-inspired office locations
+- `locations.html` — Leaflet map and showroom office locations
 - `how.html` — six-step rental process
 - `register.html` / `login.html` — demo user access
 - `profile.html` — account editing
