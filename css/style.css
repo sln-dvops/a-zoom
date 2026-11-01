@@ -355,7 +355,7 @@ a:focus-visible {
 .search-container {
   position: relative;
   z-index: 2;
-  margin-top: -25px;
+  margin-top: -15px;
 }
 .search-panel {
   display: grid;
